@@ -1,49 +1,45 @@
 import express from "express";
-import colors from "colors";
-import dotenv from "dotenv";
+import colors from 'colors';
+import dotenv from 'dotenv';
 import morgan from "morgan";
 import connectDB from "./config/db.js";
-import router from "./routes/authRoute.js";
-import cors  from "cors";
-import categoryRoute from "./routes/categoryRoute.js";
-import productRoutes from "./routes/productRoutes.js";
-import path from "path";
+import authRoute from "./routes/authRoute.js";
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import { fileURLToPath } from "url";
+import cors from "cors";
+import path from 'path';
 
-//configure env
 dotenv.config();
 
-//rest object
+connectDB();
+const __filename=fileURLToPath(import.meta.url);
+const __dirname=path.dirname(__filename);
 const app = express();
 
-//database config
-connectDB();
 
-
-
-//middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname,'./client/build')))
+app.use(express.static(path.join(__dirname,"./client/build")))
 
-//routes
-app.use('/api/v1/auth',router);
-app.use('/api/v1/category',categoryRoute);
-app.use('/api/v1/product',productRoutes);
+app.use("/api/v1/auth",authRoute);
+app.use("/api/v1/category",categoryRoutes);
+app.use("/api/v1/product",productRoutes);
 
-//rest api
-app.use('*',function(){
-    res.sendFile(path.join(__dirname,'./client/build/index.html'))
+app.use('*',function(req,res){
+    res.sendFile(path.join(__dirname,"./client/build/index.html"))
+})
+
+app.get('/', (req, res) => {
+    res.send({
+        message: "<h1>hello world welcome to new ecommerce app</h1>",
+    });
 });
 
-//PORT
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8081;
 
-
-//run listen
-app.listen(PORT,()=>{
-    console.log(`Server running on 
-    ${process.env.DEV_MODE} mode on port
-    ${PORT}`.bgCyan.white);
-})
+app.listen(PORT, () => {
+    console.log(`server is running on ${process.env.DEV_MODE} mode on  ${PORT}`.bgCyan.white);
+});
 
