@@ -34,7 +34,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/ecommerce-mern-stack.git
+   git clone https://github.com/abhijit2712/Ecommerce_App.git
 Change into the project directory:
 
 bash
@@ -53,7 +53,7 @@ Add the following variables:
 
 env
 Copy code
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=http://localhost:8000/api
 REACT_APP_CLIENT_URL=http://localhost:3000
 Update the URLs accordingly.
 
@@ -86,5 +86,3 @@ Contributions are welcome! Please follow the Contributing Guidelines.
 
 License
 This project is licensed under the MIT License.
-
-Copy and paste this content into a file named `README.md` in the root of your project. Remember to replace placeholder values like `your-username` with your actual GitHub username and customize the content based on your specific project details.
